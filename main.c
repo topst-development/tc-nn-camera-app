@@ -28,6 +28,7 @@
 #include "display_api.h"
 #include "scaler_api.h"
 
+#define DEFAULT_INPUT_PATH CAMERA_DEV_NAME_2
 #define DEFAULT_MEMORY_NAME "overlay"
 #define DEFAULT_INPUT_WIDTH (1280)
 #define DEFAULT_INPUT_HEIGHT (720)
@@ -275,7 +276,7 @@ static void printUsage(void)
 {
 	printf("------------------------------ Usage ------------------------------\n");
     printf("[Common]Print Usage Message    : -? \n");
-    printf("[Common]Input Path             : -p default[%s]\n", CAMERA_DEV_NAME_0);
+    printf("[Common]Input Path             : -p default[%s]\n", DEFAULT_INPUT_PATH);
 	printf("[Common]Output Path            : -P default[%s]\n", DISPLAY_DEV_NAME_0);
     printf("[Common]Input Width            : -w default[%d] max: 2560\n", DEFAULT_OUTPUT_WIDTH);
 	printf("[Common]Input Height           : -h default[%d]  max: 1440\n", DEFAULT_OUTPUT_HEIGHT);
@@ -290,7 +291,7 @@ static void printUsage(void)
 static void getParserArgs(param_info_t *param, int argc, char** argv)
 {
     int opt;
-    param->inputPath = CAMERA_DEV_NAME_0;
+    param->inputPath = DEFAULT_INPUT_PATH;
 	param->outputPath = DISPLAY_DEV_NAME_0;
     param->memName = DEFAULT_MEMORY_NAME;
     param->inputWidth = DEFAULT_INPUT_WIDTH;
@@ -318,7 +319,7 @@ static void getParserArgs(param_info_t *param, int argc, char** argv)
                     param->inputPath = CAMERA_DEV_NAME_3;
                 }
                 else{
-                    printf("The input value is invalid. The default value, intput path: /dev/video0, will be applied.\n");
+                    printf("The input value is invalid. Keeping input path: %s.\n", param->inputPath);
                 }
                 break;
             case 'P':
